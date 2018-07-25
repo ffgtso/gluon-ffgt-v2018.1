@@ -1,3 +1,5 @@
+(This fork is frequently updated along the v2018.x branch ...)
+
 Documentation (incomplete at this time, contribute if you can!) may be found at
 https://gluon.readthedocs.org/.
 
