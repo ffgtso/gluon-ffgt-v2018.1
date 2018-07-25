@@ -1,0 +1,29 @@
+From 098ca81df98812ab8dd971a356cb34d13ab115c4 Mon Sep 17 00:00:00 2001
+From: Julian <belzebub40k@users.noreply.github.com>
+Date: Wed, 11 Jul 2018 04:12:00 +0200
+Subject: [PATCH] docs: fix wrong Banana Pi model in v2018.1 release notes
+ (#1466)
+
+---
+ docs/releases/v2018.1.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/docs/releases/v2018.1.rst b/docs/releases/v2018.1.rst
+index 7132b0c..556d0c9 100644
+--- a/docs/releases/v2018.1.rst
++++ b/docs/releases/v2018.1.rst
+@@ -92,9 +92,9 @@ ramips-rt305x [#newtarget]_ [#noibss]_
+ sunxi [#newtarget]_
+ ===================
+ 
+-* LeMaker
++* LeMaker/SinoVoip
+ 
+-  - Lamobo r1
++  - Banana Pi (M1)
+ 
+ 
+ .. [#newtarget]
+-- 
+2.5.0
+

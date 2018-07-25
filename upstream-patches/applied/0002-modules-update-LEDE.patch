@@ -1,0 +1,358 @@
+From c28b797c918235db1cfa5b3cc0cd98c62fcee771 Mon Sep 17 00:00:00 2001
+From: Christoph Krapp <krapp@chemmedia.de>
+Date: Sat, 7 Jul 2018 23:28:51 +0200
+Subject: [PATCH] modules: update LEDE
+
+aaecfecdcd kernel: bump kernel 4.4 to version 4.4.139
+b08003223a base-files: fix links in banner.failsafe
+71019a7605 ar71xx: fix 5 GHz Wi-Fi on NBG6716
+ba5c0a1dea Revert "base-files: fix UCI config parsing and callback handling"
+5c6a8a9cdb kernel: bump kernel 4.4 to version 4.4.138
+cf4a37a581 uci: add missing 'option' support to uci_rename()
+7fc94b2a25 mac80211: rt2x00: no longer use TXOP_BACKOFF for probe frames
+b03826d8aa kernel: bump kernel 4.4 to version 4.4.137
+21f44e3389 map: add ealen as configurable uci parameter
+
+Signed-off-by: Christoph Krapp <achterin@googlemail.com>
+---
+ modules                                                           | 2 +-
+ patches/lede/0014-procd-remove-procd-nand-package.patch           | 2 +-
+ .../lede/0038-ar71xx-add-support-for-TP-Link-Archer-C25-v1.patch  | 6 +++---
+ ...dd-CONFIG_GPIO_74X164-and-CONFIG_SPI_GPIO-for-Archer-C25.patch | 6 +++---
+ .../lede/0044-ar71xx-add-support-for-TP-Link-TL-WR1043N-v5.patch  | 2 +-
+ .../lede/0045-ar71xx-add-support-for-TP-LINK-Archer-C7-v4.patch   | 4 ++--
+ patches/lede/0047-ar71xx-fix-Archer-C7-5GHz-MAC-address.patch     | 6 +++---
+ ...049-ar71xx-add-support-to-TP-Link-Archer-C59v1-and-C60v1.patch | 8 ++++----
+ .../lede/0051-ar71xx-add-support-for-TP-Link-Archer-C58-v1.patch  | 6 +++---
+ ...71xx-fix-board.bin-used-by-QCA9886-in-Archer-C58-C59-C60.patch | 4 ++--
+ ...ar71xx-Archer-C58-C59-C60-fix-qca9886-wireless-interface.patch | 4 ++--
+ .../lede/0060-ar71xx-add-unaligned-access-hacks-for-VXLAN.patch   | 2 +-
+ .../lede/0072-base-files-remove-etc-sysctl.d-from-conffiles.patch | 2 +-
+ patches/lede/0084-ar71xx-add-support-for-Fritz-Box-4020.patch     | 4 ++--
+ patches/lede/0087-ar71xx-add-support-for-GL.iNet-GL-AR750.patch   | 6 +++---
+ .../0090-ar71xx-generic-enable-CONFIG_MTD_SPLIT_TPLINK_FW.patch   | 4 ++--
+ 16 files changed, 34 insertions(+), 34 deletions(-)
+
+diff --git a/modules b/modules
+index 6e660c5..41a8aeb 100644
+--- a/modules
++++ b/modules
+@@ -2,7 +2,7 @@ GLUON_FEEDS='openwrt gluon routing luci'
+ 
+ LEDE_REPO=https://git.openwrt.org/openwrt/openwrt.git
+ LEDE_BRANCH=lede-17.01
+-LEDE_COMMIT=b6a1f43075f96b0028e33ed1af1fe31068791d24
++LEDE_COMMIT=aaecfecdcde549e9e1aa09d1d5e5d0d43d5c9b49
+ 
+ PACKAGES_OPENWRT_REPO=https://github.com/openwrt/packages.git
+ PACKAGES_OPENWRT_BRANCH=lede-17.01
+diff --git a/patches/lede/0014-procd-remove-procd-nand-package.patch b/patches/lede/0014-procd-remove-procd-nand-package.patch
+index e87d43d..0a8ffb8 100644
+--- a/patches/lede/0014-procd-remove-procd-nand-package.patch
++++ b/patches/lede/0014-procd-remove-procd-nand-package.patch
+@@ -12,7 +12,7 @@ as a separate package.
+ Signed-off-by: Matthias Schiffer <mschiffer@universe-factory.net>
+ 
+ diff --git a/package/base-files/Makefile b/package/base-files/Makefile
+-index 4fbc9a265b535d850fe812085677b3f6aabf4e1f..c971de4deee7cd331ddcad6b87eb9fefd7af6a64 100644
++index 1d034fdede7598f15b1f802c47e834990e5852d9..f473ef732106eb8fa05e7c5b59df176fef33e42d 100644
+ --- a/package/base-files/Makefile
+ +++ b/package/base-files/Makefile
+ @@ -19,7 +19,9 @@ PKG_BUILD_DEPENDS:=usign/host
+diff --git a/patches/lede/0038-ar71xx-add-support-for-TP-Link-Archer-C25-v1.patch b/patches/lede/0038-ar71xx-add-support-for-TP-Link-Archer-C25-v1.patch
+index 0aea6cf..30217b2 100644
+--- a/patches/lede/0038-ar71xx-add-support-for-TP-Link-Archer-C25-v1.patch
++++ b/patches/lede/0038-ar71xx-add-support-for-TP-Link-Archer-C25-v1.patch
+@@ -64,10 +64,10 @@ index bc2fc2f774c4f2f0bbfa6e43d9b9a55e9b63153d..38cc5d7853c79f2a7800a387310a95ab
+  	mr16|\
+  	nbg6616|\
+ diff --git a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-index b3e23c9a8f8c56870ef36fb55ae52e6b5ea61134..68f90de802ddd18e09a1da39c0d56292eea9489c 100644
++index 96ca65e694bb5ed449dcae8dbca1930d25612602..fc9eb005623fc029f839d7ce14788ffba32e42e5 100644
+ --- a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+ +++ b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-@@ -92,6 +92,7 @@ case "$FIRMWARE" in
++@@ -98,6 +98,7 @@ case "$FIRMWARE" in
+  		ath10kcal_extract "art" 20480 2116
+  		ath10kcal_patch_mac $(macaddr_add $(cat /sys/class/net/eth0/address) -2)
+  		;;
+@@ -102,7 +102,7 @@ index d2dc88127c02746cdecc4ced28f33548f35d037c..6258713dd0e3325ab109689f0ed3b51e
+  	c-55|\
+  	carambola2|\
+ diff --git a/target/linux/ar71xx/config-4.4 b/target/linux/ar71xx/config-4.4
+-index a8622454b421c1c74a8a71134b53c50399114aa5..e10401d42ae06506f82f2f5538fbc7df79fd4c65 100644
++index 91eb9f0de7ef6c472cdccf2022d888df53b75e46..d1d879cd764259571cce2a5e091ae99f0d7a6d6d 100644
+ --- a/target/linux/ar71xx/config-4.4
+ +++ b/target/linux/ar71xx/config-4.4
+ @@ -51,6 +51,7 @@ CONFIG_ATH79_MACH_AP152=y
+diff --git a/patches/lede/0041-add-CONFIG_GPIO_74X164-and-CONFIG_SPI_GPIO-for-Archer-C25.patch b/patches/lede/0041-add-CONFIG_GPIO_74X164-and-CONFIG_SPI_GPIO-for-Archer-C25.patch
+index 5343808..f44774b 100644
+--- a/patches/lede/0041-add-CONFIG_GPIO_74X164-and-CONFIG_SPI_GPIO-for-Archer-C25.patch
++++ b/patches/lede/0041-add-CONFIG_GPIO_74X164-and-CONFIG_SPI_GPIO-for-Archer-C25.patch
+@@ -9,10 +9,10 @@ Based-on-patch-by: Henryk Heisig <hyniu@o2.pl>
+ Signed-off-by: Andreas Ziegler <github@andreas-ziegler.de>
+ 
+ diff --git a/target/linux/ar71xx/config-4.4 b/target/linux/ar71xx/config-4.4
+-index e10401d42ae06506f82f2f5538fbc7df79fd4c65..c82fcf09228be7063967f2517e0942651234afb8 100644
++index d1d879cd764259571cce2a5e091ae99f0d7a6d6d..e576fd2ec4f0a8d3613f00aa0a29586b8c65abe0 100644
+ --- a/target/linux/ar71xx/config-4.4
+ +++ b/target/linux/ar71xx/config-4.4
+-@@ -272,6 +272,7 @@ CONFIG_GENERIC_TIME_VSYSCALL=y
++@@ -273,6 +273,7 @@ CONFIG_GENERIC_TIME_VSYSCALL=y
+  CONFIG_GPIOLIB=y
+  CONFIG_GPIOLIB_IRQCHIP=y
+  CONFIG_GPIO_DEVRES=y
+@@ -20,7 +20,7 @@ index e10401d42ae06506f82f2f5538fbc7df79fd4c65..c82fcf09228be7063967f2517e094265
+  # CONFIG_GPIO_LATCH is not set
+  CONFIG_GPIO_NXP_74HC153=y
+  CONFIG_GPIO_PCF857X=y
+-@@ -429,6 +430,7 @@ CONFIG_SOC_QCA956X=y
++@@ -430,6 +431,7 @@ CONFIG_SOC_QCA956X=y
+  CONFIG_SPI=y
+  CONFIG_SPI_ATH79=y
+  CONFIG_SPI_BITBANG=y
+diff --git a/patches/lede/0044-ar71xx-add-support-for-TP-Link-TL-WR1043N-v5.patch b/patches/lede/0044-ar71xx-add-support-for-TP-Link-TL-WR1043N-v5.patch
+index af983e7..6c91929 100644
+--- a/patches/lede/0044-ar71xx-add-support-for-TP-Link-TL-WR1043N-v5.patch
++++ b/patches/lede/0044-ar71xx-add-support-for-TP-Link-TL-WR1043N-v5.patch
+@@ -108,7 +108,7 @@ index 6258713dd0e3325ab109689f0ed3b51e27c41f89..774e3c8964ef724d1efbae56434aeaa9
+  	unifiac-lite|\
+  	unifiac-pro|\
+ diff --git a/target/linux/ar71xx/config-4.4 b/target/linux/ar71xx/config-4.4
+-index c82fcf09228be7063967f2517e0942651234afb8..57b6d2e541d7ef9dea8570ba8de72164d97b9775 100644
++index e576fd2ec4f0a8d3613f00aa0a29586b8c65abe0..6da3c323d300705a29355cdccff09fce1ce1bad7 100644
+ --- a/target/linux/ar71xx/config-4.4
+ +++ b/target/linux/ar71xx/config-4.4
+ @@ -181,6 +181,7 @@ CONFIG_ATH79_MACH_TL_WR1041N_V2=y
+diff --git a/patches/lede/0045-ar71xx-add-support-for-TP-LINK-Archer-C7-v4.patch b/patches/lede/0045-ar71xx-add-support-for-TP-LINK-Archer-C7-v4.patch
+index 85b5472..d876aa1 100644
+--- a/patches/lede/0045-ar71xx-add-support-for-TP-LINK-Archer-C7-v4.patch
++++ b/patches/lede/0045-ar71xx-add-support-for-TP-LINK-Archer-C7-v4.patch
+@@ -92,10 +92,10 @@ index 61db387c9ecefd7090c25a5f5d75fdbf65a44d65..97372bed0ea2fadfab10f22916a1e0d6
+  	mr16|\
+  	nbg6616|\
+ diff --git a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-index 68f90de802ddd18e09a1da39c0d56292eea9489c..96b8f6b9a4bdd6a1609a819e72ade315bccfb3c0 100644
++index fc9eb005623fc029f839d7ce14788ffba32e42e5..be818b78638b741fff963c222bab7c395996c608 100644
+ --- a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+ +++ b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-@@ -92,6 +92,7 @@ case "$FIRMWARE" in
++@@ -98,6 +98,7 @@ case "$FIRMWARE" in
+  		ath10kcal_extract "art" 20480 2116
+  		ath10kcal_patch_mac $(macaddr_add $(cat /sys/class/net/eth0/address) -2)
+  		;;
+diff --git a/patches/lede/0047-ar71xx-fix-Archer-C7-5GHz-MAC-address.patch b/patches/lede/0047-ar71xx-fix-Archer-C7-5GHz-MAC-address.patch
+index 3ae0b9c..39c9e18 100644
+--- a/patches/lede/0047-ar71xx-fix-Archer-C7-5GHz-MAC-address.patch
++++ b/patches/lede/0047-ar71xx-fix-Archer-C7-5GHz-MAC-address.patch
+@@ -12,10 +12,10 @@ every C7 v4 with LEDE carries the same MAC-Address on the 5GHz WiFi.
+ Signed-off-by: David Bauer <mail@david-bauer.net>
+ 
+ diff --git a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-index 96b8f6b9a4bdd6a1609a819e72ade315bccfb3c0..607bbd2c0ec4b59ba569550e9e0e87b80c7ddddb 100644
++index be818b78638b741fff963c222bab7c395996c608..697fcb68d246aa445ce029440643ad5950e48f6d 100644
+ --- a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+ +++ b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-@@ -47,6 +47,10 @@ board=$(ar71xx_board_name)
++@@ -53,6 +53,10 @@ board=$(ar71xx_board_name)
+  case "$FIRMWARE" in
+  "ath10k/cal-pci-0000:00:00.0.bin")
+  	case $board in
+@@ -26,7 +26,7 @@ index 96b8f6b9a4bdd6a1609a819e72ade315bccfb3c0..607bbd2c0ec4b59ba569550e9e0e87b8
+  	cf-e380ac-v1|\
+  	cf-e380ac-v2|\
+  	dlan-pro-1200-ac|\
+-@@ -92,7 +96,6 @@ case "$FIRMWARE" in
++@@ -98,7 +102,6 @@ case "$FIRMWARE" in
+  		ath10kcal_extract "art" 20480 2116
+  		ath10kcal_patch_mac $(macaddr_add $(cat /sys/class/net/eth0/address) -2)
+  		;;
+diff --git a/patches/lede/0049-ar71xx-add-support-to-TP-Link-Archer-C59v1-and-C60v1.patch b/patches/lede/0049-ar71xx-add-support-to-TP-Link-Archer-C59v1-and-C60v1.patch
+index 4e9db3a..a31ef5b 100644
+--- a/patches/lede/0049-ar71xx-add-support-to-TP-Link-Archer-C59v1-and-C60v1.patch
++++ b/patches/lede/0049-ar71xx-add-support-to-TP-Link-Archer-C59v1-and-C60v1.patch
+@@ -113,10 +113,10 @@ index 97372bed0ea2fadfab10f22916a1e0d6a9c65725..3aa1f054d4f791545a8b6644f7bd24f6
+  	mr16|\
+  	nbg6616|\
+ diff --git a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-index 607bbd2c0ec4b59ba569550e9e0e87b80c7ddddb..5dd1d69e7e163c938759ce476846e4d985184b7b 100644
++index 697fcb68d246aa445ce029440643ad5950e48f6d..6c62f391e1aac2f052d3397fc25f8bddcca581dd 100644
+ --- a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+ +++ b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-@@ -97,6 +97,8 @@ case "$FIRMWARE" in
++@@ -103,6 +103,8 @@ case "$FIRMWARE" in
+  		ath10kcal_patch_mac $(macaddr_add $(cat /sys/class/net/eth0/address) -2)
+  		;;
+  	archer-c25-v1|\
+@@ -156,7 +156,7 @@ index d6650e7719d268e1a500638b7eda2e15b9251aea..f4ac73e40e1acb800433a0b1348c8264
+  	c-55|\
+  	carambola2|\
+ diff --git a/target/linux/ar71xx/config-4.4 b/target/linux/ar71xx/config-4.4
+-index 57b6d2e541d7ef9dea8570ba8de72164d97b9775..5b33d48e52309b807dbdf2697524809ad08072ae 100644
++index 6da3c323d300705a29355cdccff09fce1ce1bad7..e335ef9b7dfe8f0250b4362542ea2518eac34cb4 100644
+ --- a/target/linux/ar71xx/config-4.4
+ +++ b/target/linux/ar71xx/config-4.4
+ @@ -52,6 +52,8 @@ CONFIG_ATH79_MACH_AP152=y
+@@ -168,7 +168,7 @@ index 57b6d2e541d7ef9dea8570ba8de72164d97b9775..5b33d48e52309b807dbdf2697524809a
+  CONFIG_ATH79_MACH_ARCHER_C7=y
+  CONFIG_ATH79_MACH_ARDUINO_YUN=y
+  CONFIG_ATH79_MACH_AW_NR580=y
+-@@ -272,6 +274,7 @@ CONFIG_GENERIC_SMP_IDLE_THREAD=y
++@@ -273,6 +275,7 @@ CONFIG_GENERIC_SMP_IDLE_THREAD=y
+  CONFIG_GENERIC_TIME_VSYSCALL=y
+  CONFIG_GPIOLIB=y
+  CONFIG_GPIOLIB_IRQCHIP=y
+diff --git a/patches/lede/0051-ar71xx-add-support-for-TP-Link-Archer-C58-v1.patch b/patches/lede/0051-ar71xx-add-support-for-TP-Link-Archer-C58-v1.patch
+index 222e005..3bf6a3a 100644
+--- a/patches/lede/0051-ar71xx-add-support-for-TP-Link-Archer-C58-v1.patch
++++ b/patches/lede/0051-ar71xx-add-support-for-TP-Link-Archer-C58-v1.patch
+@@ -85,10 +85,10 @@ index 3aa1f054d4f791545a8b6644f7bd24f64ed546a3..382500b75ee6dc1fe1126fb3121f4ae2
+  	archer-c60-v1|\
+  	mr12|\
+ diff --git a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-index 5dd1d69e7e163c938759ce476846e4d985184b7b..538c86e4743109f7665096da32620d7862248aea 100644
++index 6c62f391e1aac2f052d3397fc25f8bddcca581dd..4ef5ba983d3fadc5e7842f707fff641a3c0cea8f 100644
+ --- a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+ +++ b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-@@ -134,6 +134,13 @@ case "$FIRMWARE" in
++@@ -140,6 +140,13 @@ case "$FIRMWARE" in
+  		;;
+  	esac
+  	;;
+@@ -156,7 +156,7 @@ index f4ac73e40e1acb800433a0b1348c8264a4639c30..5e8a06a7ae70ec349693c09deedbfce4
+  	archer-c60-v1|\
+  	bullet-m|\
+ diff --git a/target/linux/ar71xx/config-4.4 b/target/linux/ar71xx/config-4.4
+-index 5b33d48e52309b807dbdf2697524809ad08072ae..396a4fa02adb37c6e5f9f7f1cc40fd1014361654 100644
++index e335ef9b7dfe8f0250b4362542ea2518eac34cb4..b84e1cb584f3afce016d0685fb2397962ee85645 100644
+ --- a/target/linux/ar71xx/config-4.4
+ +++ b/target/linux/ar71xx/config-4.4
+ @@ -52,6 +52,7 @@ CONFIG_ATH79_MACH_AP152=y
+diff --git a/patches/lede/0054-ar71xx-fix-board.bin-used-by-QCA9886-in-Archer-C58-C59-C60.patch b/patches/lede/0054-ar71xx-fix-board.bin-used-by-QCA9886-in-Archer-C58-C59-C60.patch
+index 68c59d2..e0062d5 100644
+--- a/patches/lede/0054-ar71xx-fix-board.bin-used-by-QCA9886-in-Archer-C58-C59-C60.patch
++++ b/patches/lede/0054-ar71xx-fix-board.bin-used-by-QCA9886-in-Archer-C58-C59-C60.patch
+@@ -6,10 +6,10 @@ Signed-off-by: Henryk Heisig <hyniu@o2.pl>
+ (cherry picked from commit e917e51bf91fc7cb5085bda5e67d62520801f9cc)
+ 
+ diff --git a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-index 538c86e4743109f7665096da32620d7862248aea..cfdc20455d61c3900473f57c3267b1a3fd10e150 100644
++index 4ef5ba983d3fadc5e7842f707fff641a3c0cea8f..8efe348498d4aaf5ae660a29073fc75ae7c9d72e 100644
+ --- a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+ +++ b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-@@ -138,6 +138,8 @@ case "$FIRMWARE" in
++@@ -144,6 +144,8 @@ case "$FIRMWARE" in
+  	case $board in
+  	archer-c58-v1)
+  		ath10kcal_extract "art" 20480 12064
+diff --git a/patches/lede/0055-ar71xx-Archer-C58-C59-C60-fix-qca9886-wireless-interface.patch b/patches/lede/0055-ar71xx-Archer-C58-C59-C60-fix-qca9886-wireless-interface.patch
+index 291948d..e1a2a3b 100644
+--- a/patches/lede/0055-ar71xx-Archer-C58-C59-C60-fix-qca9886-wireless-interface.patch
++++ b/patches/lede/0055-ar71xx-Archer-C58-C59-C60-fix-qca9886-wireless-interface.patch
+@@ -9,10 +9,10 @@ Signed-off-by: Henryk Heisig <hyniu@o2.pl>
+ (cherry picked from commit 34958c826915cf864833ed8ba6e5b49d44c6cb41)
+ 
+ diff --git a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-index cfdc20455d61c3900473f57c3267b1a3fd10e150..91bdf0d3c591516f58030b165052b3dd2751314f 100644
++index 8efe348498d4aaf5ae660a29073fc75ae7c9d72e..65251284bba605afda8709c4799060e7a5554193 100644
+ --- a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+ +++ b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-@@ -136,7 +136,9 @@ case "$FIRMWARE" in
++@@ -142,7 +142,9 @@ case "$FIRMWARE" in
+  	;;
+  "ath10k/pre-cal-pci-0000:00:00.0.bin")
+  	case $board in
+diff --git a/patches/lede/0060-ar71xx-add-unaligned-access-hacks-for-VXLAN.patch b/patches/lede/0060-ar71xx-add-unaligned-access-hacks-for-VXLAN.patch
+index c7ae68c..55dde71 100644
+--- a/patches/lede/0060-ar71xx-add-unaligned-access-hacks-for-VXLAN.patch
++++ b/patches/lede/0060-ar71xx-add-unaligned-access-hacks-for-VXLAN.patch
+@@ -5,7 +5,7 @@ Subject: ar71xx: add unaligned access hacks for VXLAN
+ Signed-off-by: Matthias Schiffer <mschiffer@universe-factory.net>
+ 
+ diff --git a/target/linux/ar71xx/patches-4.4/910-unaligned_access_hacks.patch b/target/linux/ar71xx/patches-4.4/910-unaligned_access_hacks.patch
+-index 374f9be3b4b76984842d3673ea78b70aadc9476a..3b6ed31556cbd1fa81bb6b616fc78e19b56099c4 100644
++index bbfe7bd80316050ae81959e4c17157b7de2141db..154dffe16eb65de7fef5aa1ac19a9e07403dc1ee 100644
+ --- a/target/linux/ar71xx/patches-4.4/910-unaligned_access_hacks.patch
+ +++ b/target/linux/ar71xx/patches-4.4/910-unaligned_access_hacks.patch
+ @@ -929,3 +929,119 @@
+diff --git a/patches/lede/0072-base-files-remove-etc-sysctl.d-from-conffiles.patch b/patches/lede/0072-base-files-remove-etc-sysctl.d-from-conffiles.patch
+index 13e8018..c1445fe 100644
+--- a/patches/lede/0072-base-files-remove-etc-sysctl.d-from-conffiles.patch
++++ b/patches/lede/0072-base-files-remove-etc-sysctl.d-from-conffiles.patch
+@@ -9,7 +9,7 @@ old defaults get replaced properly.
+ Signed-off-by: Matthias Schiffer <mschiffer@universe-factory.net>
+ 
+ diff --git a/package/base-files/Makefile b/package/base-files/Makefile
+-index c971de4deee7cd331ddcad6b87eb9fefd7af6a64..55e67a97d03df7d96cf8a4aac3c5325ce7105c80 100644
++index f473ef732106eb8fa05e7c5b59df176fef33e42d..32b1ce0923cb984ff32e4444a18eccdad7572d70 100644
+ --- a/package/base-files/Makefile
+ +++ b/package/base-files/Makefile
+ @@ -59,8 +59,6 @@ define Package/base-files/conffiles
+diff --git a/patches/lede/0084-ar71xx-add-support-for-Fritz-Box-4020.patch b/patches/lede/0084-ar71xx-add-support-for-Fritz-Box-4020.patch
+index 15d1873..bf30749 100644
+--- a/patches/lede/0084-ar71xx-add-support-for-Fritz-Box-4020.patch
++++ b/patches/lede/0084-ar71xx-add-support-for-Fritz-Box-4020.patch
+@@ -163,7 +163,7 @@ index 5e8a06a7ae70ec349693c09deedbfce41a52cfc2..491b5d5a98b44844f14441d4024f2ad9
+  
+  	echo "Sysupgrade is not yet supported on $board."
+ diff --git a/target/linux/ar71xx/config-4.4 b/target/linux/ar71xx/config-4.4
+-index 396a4fa02adb37c6e5f9f7f1cc40fd1014361654..45bf500643837a7270b45e32b22225c06c5fb841 100644
++index b84e1cb584f3afce016d0685fb2397962ee85645..9f449973b17a1d82098fb5b50f4b8f6cc9f869f8 100644
+ --- a/target/linux/ar71xx/config-4.4
+ +++ b/target/linux/ar71xx/config-4.4
+ @@ -106,6 +106,7 @@ CONFIG_ATH79_MACH_ESR1750=y
+@@ -174,7 +174,7 @@ index 396a4fa02adb37c6e5f9f7f1cc40fd1014361654..45bf500643837a7270b45e32b22225c0
+  CONFIG_ATH79_MACH_GL_AR150=y
+  CONFIG_ATH79_MACH_GL_AR300=y
+  CONFIG_ATH79_MACH_GL_AR300M=y
+-@@ -373,6 +374,7 @@ CONFIG_MTD_PHYSMAP=y
++@@ -374,6 +375,7 @@ CONFIG_MTD_PHYSMAP=y
+  CONFIG_MTD_REDBOOT_DIRECTORY_BLOCK=-2
+  CONFIG_MTD_REDBOOT_PARTS=y
+  CONFIG_MTD_SPI_NOR=y
+diff --git a/patches/lede/0087-ar71xx-add-support-for-GL.iNet-GL-AR750.patch b/patches/lede/0087-ar71xx-add-support-for-GL.iNet-GL-AR750.patch
+index 01830ca..7c574e9 100644
+--- a/patches/lede/0087-ar71xx-add-support-for-GL.iNet-GL-AR750.patch
++++ b/patches/lede/0087-ar71xx-add-support-for-GL.iNet-GL-AR750.patch
+@@ -79,10 +79,10 @@ index 336d078f72a06073e3465c36ca98035c7d70282f..01d3b787bedcab82a5797c9a4801e813
+  			;;
+  		qihoo-c301)
+ diff --git a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-index 91bdf0d3c591516f58030b165052b3dd2751314f..1626622a8e46484bbf2719f19843e61d9cc92506 100644
++index 65251284bba605afda8709c4799060e7a5554193..3b1e408f00846f8cc39e05d90600992e382b314a 100644
+ --- a/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+ +++ b/target/linux/ar71xx/base-files/etc/hotplug.d/firmware/11-ath10k-caldata
+-@@ -103,6 +103,7 @@ case "$FIRMWARE" in
++@@ -109,6 +109,7 @@ case "$FIRMWARE" in
+  		ath10kcal_extract "art" 20480 2116
+  		ath10kcal_patch_mac $(macaddr_add $(cat /sys/class/net/eth1/address) -2)
+  		;;
+@@ -129,7 +129,7 @@ index 03677ad1240c9a5af341354b95561f9d493a9cd8..236520b27c4d6d0b1b7e483d1100fb5a
+  	gl-mifi|\
+  	hiwifi-hc6361|\
+ diff --git a/target/linux/ar71xx/config-4.4 b/target/linux/ar71xx/config-4.4
+-index 45bf500643837a7270b45e32b22225c06c5fb841..d96642b97c36187febb1f3843e7dd9acfab0e40d 100644
++index 9f449973b17a1d82098fb5b50f4b8f6cc9f869f8..d5ad6396a5c422b9b68b0a94658962226c13006e 100644
+ --- a/target/linux/ar71xx/config-4.4
+ +++ b/target/linux/ar71xx/config-4.4
+ @@ -110,6 +110,7 @@ CONFIG_ATH79_MACH_FRITZ4020=y
+diff --git a/patches/lede/0090-ar71xx-generic-enable-CONFIG_MTD_SPLIT_TPLINK_FW.patch b/patches/lede/0090-ar71xx-generic-enable-CONFIG_MTD_SPLIT_TPLINK_FW.patch
+index 4fcd572..7df0cba 100644
+--- a/patches/lede/0090-ar71xx-generic-enable-CONFIG_MTD_SPLIT_TPLINK_FW.patch
++++ b/patches/lede/0090-ar71xx-generic-enable-CONFIG_MTD_SPLIT_TPLINK_FW.patch
+@@ -9,10 +9,10 @@ rid of statically defined "kernel" and "rootfs" partitions in cmdline.
+ Signed-off-by: Piotr Dymacz <pepe2k@gmail.com>
+ 
+ diff --git a/target/linux/ar71xx/config-4.4 b/target/linux/ar71xx/config-4.4
+-index d96642b97c36187febb1f3843e7dd9acfab0e40d..6c29cd7748b3ce7e53adf359cd5002ba01066fbd 100644
++index d5ad6396a5c422b9b68b0a94658962226c13006e..26f855e66796106cd0f232c9c5e920b02365de31 100644
+ --- a/target/linux/ar71xx/config-4.4
+ +++ b/target/linux/ar71xx/config-4.4
+-@@ -379,6 +379,7 @@ CONFIG_MTD_SPLIT_EVA_FW=y
++@@ -380,6 +380,7 @@ CONFIG_MTD_SPLIT_EVA_FW=y
+  CONFIG_MTD_SPLIT_FIRMWARE=y
+  CONFIG_MTD_SPLIT_LZMA_FW=y
+  CONFIG_MTD_SPLIT_SEAMA_FW=y
+-- 
+2.5.0
+

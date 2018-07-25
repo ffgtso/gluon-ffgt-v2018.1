@@ -1,0 +1,76 @@
+From a7a5db9f545d5eb1066b1533aa591892d80ce93b Mon Sep 17 00:00:00 2001
+From: Sven Eckelmann <sven@narfation.org>
+Date: Sun, 22 Jul 2018 00:36:57 +0200
+Subject: [PATCH] gluon-mesh-batman-adv: Drop IPv4 anycast related packets
+ from/to bat0
+
+The commit b3762fc61cca ("gluon-client-bridge: move IPv4 local subnet route
+to br-client (#1312)") moves the IPv4 prefix from the local-port interface
+to br-client. A client requesting an IPv4 connection to the IPv4 anycast
+address of the node (the device running gluon) will create following
+packets:
+
+1. ARP packet from client to get the MAC of the mac address of the anycast
+   IPv4 address
+2. ARP reply from node to client with the anycast MAC address for the IPv4
+   anycast address
+3. IPv4 packet from client which requires reply (for example ICMP echo
+   request)
+4. ARP request for the client MAC address for its IPv4 address in prefix4
+   (done with the mac address of br-client and transmitted over br-client)
+5. IPv4 packet from node (transmitted over br-client with br-client MAC
+   address) as reply for the client IPv4 packet (for example ICMP echo
+   reply)
+
+The step 4 is extremely problematic here. ARP replies with the anycast IPv4
+address must not be submitted or received via bat0 - expecially not when it
+contains an node specific MAC address as source. When it is still done then
+the wrong MAC address is stored in the batadv DAT cache and ARP packet is
+maybe even forwarded to clients. This latter is especially true for ARP
+requests which are broadcast and will be flooded to the complete mesh.
+
+Clients will see these ARP packets and change their own neighbor IP
+(translation) table. They will then try to submit the packets for IPv4
+anycast addresses to the complete wrong device in the mesh. This will for
+example break the access to the status page to the connected device or the
+anycast DNS forwarder implementation. Especially the latter causes extreme
+latency when clients try to connect to server using a domain name or even
+breaks the connection setup process completely. Both are caused by the
+unanswered DNS requests which at first glance look like packet loss.
+
+An node must therefore take care of:
+
+* not transmitting ARP packets related to the anycast IPv4 address over
+  bat0
+* drop ARP packets related to the anycast IPv4 when they are received on
+  bat0 from a still broken node
+* don't accept ARP packets related to the anycast IPv4 replies on local
+  node when it comes from bat0
+
+Fixes: b3762fc61cca ("gluon-client-bridge: move IPv4 local subnet route to br-client (#1312)")
+---
+ .../gluon-mesh-batman-adv/files/lib/gluon/ebtables/250-next-node  | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/package/gluon-mesh-batman-adv/files/lib/gluon/ebtables/250-next-node b/package/gluon-mesh-batman-adv/files/lib/gluon/ebtables/250-next-node
+index 93680f3..8b8d77a 100644
+--- a/package/gluon-mesh-batman-adv/files/lib/gluon/ebtables/250-next-node
++++ b/package/gluon-mesh-batman-adv/files/lib/gluon/ebtables/250-next-node
+@@ -15,6 +15,14 @@ rule('OUTPUT --logical-out br-client -o bat0 -s ' .. macaddr .. ' -j DROP')
+ if next_node.ip4 then
+ 	rule('FORWARD --logical-out br-client -o bat0 -p ARP --arp-ip-src ' .. next_node.ip4 .. ' -j DROP')
+ 	rule('FORWARD --logical-out br-client -o bat0 -p ARP --arp-ip-dst ' .. next_node.ip4 .. ' -j DROP')
++	rule('FORWARD --logical-out br-client -i bat0 -p ARP --arp-ip-src ' .. next_node.ip4 .. ' -j DROP')
++	rule('FORWARD --logical-out br-client -i bat0 -p ARP --arp-ip-dst ' .. next_node.ip4 .. ' -j DROP')
++
++	rule('OUTPUT --logical-out br-client -o bat0 -p ARP --arp-ip-src ' .. next_node.ip4 .. ' -j DROP')
++	rule('OUTPUT --logical-out br-client -o bat0 -p ARP --arp-ip-dst ' .. next_node.ip4 .. ' -j DROP')
++
++	rule('INPUT -i bat0 -p ARP --arp-ip-src ' .. next_node.ip4 .. ' -j DROP')
++	rule('INPUT -i bat0 -p ARP --arp-ip-dst ' .. next_node.ip4 .. ' -j DROP')
+ 
+ 	rule('FORWARD --logical-out br-client -o bat0 -p IPv4 --ip-destination ' .. next_node.ip4 .. ' -j DROP')
+ 	rule('OUTPUT --logical-out br-client -o bat0 -p IPv4 --ip-destination ' .. next_node.ip4 .. ' -j DROP')
+-- 
+2.5.0
+
