@@ -1,0 +1,25 @@
+From aaef6163ffa84575ffd451009042c7d4b20b3bd4 Mon Sep 17 00:00:00 2001
+From: mokkin <markus@haybach.com>
+Date: Sun, 29 Jul 2018 20:14:19 +0200
+Subject: [PATCH] docs: site: fix typo (#1498)
+
+---
+ docs/user/site.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/docs/user/site.rst b/docs/user/site.rst
+index 94d6d18..2325fe6 100644
+--- a/docs/user/site.rst
++++ b/docs/user/site.rst
+@@ -104,7 +104,7 @@ wifi24 \: optional
+     WLAN configuration for 2.4 GHz devices.
+     ``channel`` must be set to a valid wireless channel for your radio.
+ 
+-    There are currently three interface types available. You many choose to
++    There are currently three interface types available. You may choose to
+     configure any subset of them:
+ 
+     - ``ap`` creates a master interface where clients may connect
+-- 
+2.5.0
+

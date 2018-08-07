@@ -1,0 +1,10 @@
+
+$ git clone https://github.com/freifunk-gluon/gluon.git gluon-upstream
+cd gluon-upstream/
+git checkout -b v2018.1.x
+# add commits, from oldest to newest, to /tmp/7777
+n=(Last#from_upstream-patches + 1); for i in $(cat /tmp/7777) ; do git format-patch --output-directory ../gluon-ffgt-v2018.1/upstream-patches --start-number $n -1 $i ; n=$(expr $n + 1); done
+cd ../gluon-ffgt-v2018.1/
+# commit & push
+cd upstream-patches/
+for i in 0*.patch ; do git am < $i && mv $i applied/ ; done

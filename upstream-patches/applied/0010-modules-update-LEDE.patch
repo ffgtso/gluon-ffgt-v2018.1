@@ -1,0 +1,45 @@
+From 0cb98882d05924878775196fcdfa600c3d846215 Mon Sep 17 00:00:00 2001
+From: Andreas Ziegler <dev@andreas-ziegler.de>
+Date: Sun, 5 Aug 2018 22:36:47 +0200
+Subject: [PATCH] modules: update LEDE
+
+309414ee8d uclient: update to latest git HEAD
+bcf91e578c downloads.mk: introduce name-agnostic PROJECT_GIT variable
+b7e3f10e80 sdk: include arch/arm/ Linux includes along with arch/arm64/ ones
+d93ef3c8c8 sdk: bundle usbip userspace sources
+e5b7404f25 kmod-sched-cake: bump to 20180716
+2725ad8de4 iproute2: merge upstream CAKE support
+28d4e55432 WDR4900v1 remove dt node for absent hw crypto.
+21c317a892 build: fix compile error when a package includes itself in PROVIDES
+aee5c53a8d apm821xx: fix sata access freezes
+54b91c85e7 Revert "iproute2: tc: bump to support kmod-sched-cake"
+90eac8984a Revert "kmod-sched-cake: bump to 20180716"
+91c9400816 scripts: bundle-libraries: fix build on OS X (FS#1493)
+54c0ef6ff5 build: bundle-libraries.sh: patch bundled ld.so
+79c8f2f50b mtd: improve check for TRX header being already fixed
+828eaeee25 mtd: support bad blocks within the mtd_fixtrx()
+8d4da3c589 iproute2: tc: bump to support kmod-sched-cake
+0e1606ba3d kmod-sched-cake: bump to 20180716
+c6a46c6e1d LEDE v17.01.5: revert to branch defaults
+248b358903 LEDE v17.01.5: adjust config defaults
+38e704be71 kernel: bump kernel 4.4 to version 4.4.140
+---
+ modules | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/modules b/modules
+index 41a8aeb..2e995e1 100644
+--- a/modules
++++ b/modules
+@@ -2,7 +2,7 @@ GLUON_FEEDS='openwrt gluon routing luci'
+ 
+ LEDE_REPO=https://git.openwrt.org/openwrt/openwrt.git
+ LEDE_BRANCH=lede-17.01
+-LEDE_COMMIT=aaecfecdcde549e9e1aa09d1d5e5d0d43d5c9b49
++LEDE_COMMIT=309414ee8d6cf2e31476133606b2e390b0efbac5
+ 
+ PACKAGES_OPENWRT_REPO=https://github.com/openwrt/packages.git
+ PACKAGES_OPENWRT_BRANCH=lede-17.01
+-- 
+2.5.0
+
