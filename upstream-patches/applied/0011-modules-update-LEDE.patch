@@ -1,0 +1,45 @@
+From 6a3d5554c170da07c3c5be3741ab9921e5839159 Mon Sep 17 00:00:00 2001
+From: Matthias Schiffer <mschiffer@universe-factory.net>
+Date: Thu, 9 Aug 2018 23:23:57 +0200
+Subject: [PATCH] modules: update LEDE
+
+0a2c984222d0 kernel: ext4: fix check to prevent initializing reserved inodes
+91d209362b97 kernel: bump kernel 4.4 to version 4.4.147
+b5d9776cd24b firmware: amd64-microcode: update to 20180524
+55ab8649e72b firmware: intel-microcode: bump to 20180703
+
+Fixes #1504
+---
+ modules                                                             | 2 +-
+ patches/lede/0060-ar71xx-add-unaligned-access-hacks-for-VXLAN.patch | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/modules b/modules
+index 2e995e1..fefeb87 100644
+--- a/modules
++++ b/modules
+@@ -2,7 +2,7 @@ GLUON_FEEDS='openwrt gluon routing luci'
+ 
+ LEDE_REPO=https://git.openwrt.org/openwrt/openwrt.git
+ LEDE_BRANCH=lede-17.01
+-LEDE_COMMIT=309414ee8d6cf2e31476133606b2e390b0efbac5
++LEDE_COMMIT=0a2c984222d03d940c52c3675849dd6398b34e64
+ 
+ PACKAGES_OPENWRT_REPO=https://github.com/openwrt/packages.git
+ PACKAGES_OPENWRT_BRANCH=lede-17.01
+diff --git a/patches/lede/0060-ar71xx-add-unaligned-access-hacks-for-VXLAN.patch b/patches/lede/0060-ar71xx-add-unaligned-access-hacks-for-VXLAN.patch
+index 55dde71..e31f4d0 100644
+--- a/patches/lede/0060-ar71xx-add-unaligned-access-hacks-for-VXLAN.patch
++++ b/patches/lede/0060-ar71xx-add-unaligned-access-hacks-for-VXLAN.patch
+@@ -5,7 +5,7 @@ Subject: ar71xx: add unaligned access hacks for VXLAN
+ Signed-off-by: Matthias Schiffer <mschiffer@universe-factory.net>
+ 
+ diff --git a/target/linux/ar71xx/patches-4.4/910-unaligned_access_hacks.patch b/target/linux/ar71xx/patches-4.4/910-unaligned_access_hacks.patch
+-index bbfe7bd80316050ae81959e4c17157b7de2141db..154dffe16eb65de7fef5aa1ac19a9e07403dc1ee 100644
++index f766850aebcbd53e6b0e94e654068afe8f5a81c4..d0cc7c52c06522ab2cad5bc3c14f06ad1530fc20 100644
+ --- a/target/linux/ar71xx/patches-4.4/910-unaligned_access_hacks.patch
+ +++ b/target/linux/ar71xx/patches-4.4/910-unaligned_access_hacks.patch
+ @@ -929,3 +929,119 @@
+-- 
+2.5.0
+
