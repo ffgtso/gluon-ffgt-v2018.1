@@ -1,0 +1,37 @@
+From 4644f85bfcfe59063d740e6f0ef11cc04b143d1e Mon Sep 17 00:00:00 2001
+From: Matthias Schiffer <mschiffer@universe-factory.net>
+Date: Mon, 3 Sep 2018 23:27:42 +0200
+Subject: [PATCH] modules: update LEDE
+
+184fe11483b9 LEDE v17.01.6: revert to branch defaults
+9a96ec08a953 LEDE v17.01.6: adjust config defaults
+2252731af43d grub2: rebase patches
+d3e325dfeffd bzip2: Fix CVE-2016-3189
+6aae528cc3b7 grub2: Fix CVE-2015-8370
+9d3825a0279a scripts: bundle-libraries: fix logic flaw
+6e8f1c387892 scripts: bundle-libraries: prevent loading host locales (FS#1803)
+f712db9df632 kernel: bump kernel 4.4 to version 4.4.153
+55840040dfcc mt76: Fix mirror hash
+bb7c4cff2086 dropbear: backport upstream fix for CVE-2018-15599
+8a72a868fd80 kernel: bump kernel 4.4 to version 4.4.151
+9c0bab0059f7 kernel: bump kernel 4.4 to version 4.4.150
+---
+ modules | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/modules b/modules
+index 808b856..f6c3287 100644
+--- a/modules
++++ b/modules
+@@ -2,7 +2,7 @@ GLUON_FEEDS='openwrt gluon routing luci'
+ 
+ LEDE_REPO=https://git.openwrt.org/openwrt/openwrt.git
+ LEDE_BRANCH=lede-17.01
+-LEDE_COMMIT=8f5c55f63eceb326c3427a5ba79cea2a96af0e4f
++LEDE_COMMIT=184fe11483b9595f31a028356f8cc18fb18536e3
+ 
+ PACKAGES_OPENWRT_REPO=https://github.com/openwrt/packages.git
+ PACKAGES_OPENWRT_BRANCH=lede-17.01
+-- 
+2.5.0
+

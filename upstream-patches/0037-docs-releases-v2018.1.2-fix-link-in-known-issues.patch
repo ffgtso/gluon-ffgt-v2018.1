@@ -1,0 +1,25 @@
+From 20f842ab1e7bfd8bccfb3cbbd799b91c9e84ecf5 Mon Sep 17 00:00:00 2001
+From: Martin Weinelt <hexa@darmstadt.ccc.de>
+Date: Mon, 26 Nov 2018 22:14:15 +0100
+Subject: [PATCH] docs: releases/v2018.1.2: fix link in known issues
+
+---
+ docs/releases/v2018.1.2.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/docs/releases/v2018.1.2.rst b/docs/releases/v2018.1.2.rst
+index 10be4a7..5e7c664 100644
+--- a/docs/releases/v2018.1.2.rst
++++ b/docs/releases/v2018.1.2.rst
+@@ -38,7 +38,7 @@ Other changes
+ Known issues
+ ~~~~~~~~~~~~
+ 
+-* Missing kernel module dependencies prevent batman-adv from being loaded on devices without WiFi drivers  (`#1578 <https://github.com/freifunk-gluon/gluon/issues/1578`_)
++* Missing kernel module dependencies prevent batman-adv from being loaded on devices without WiFi drivers  (`#1578 <https://github.com/freifunk-gluon/gluon/issues/1578>`_)
+ 
+ * Default TX power on many Ubiquiti devices is too high, correct offsets are unknown (`#94 <https://github.com/freifunk-gluon/gluon/issues/94>`_)
+ 
+-- 
+2.5.0
+

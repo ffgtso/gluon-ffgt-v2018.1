@@ -1,0 +1,26 @@
+From 1649358d17c631f75630bb96cd869e8004044607 Mon Sep 17 00:00:00 2001
+From: Martin Weinelt <hexa@darmstadt.ccc.de>
+Date: Sat, 3 Nov 2018 21:50:58 +0100
+Subject: [PATCH] docs: releases/v2018.1: add remark about GLUON_WLAN_MESH
+ variable
+
+fixes #1561
+---
+ docs/releases/v2018.1.rst | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/docs/releases/v2018.1.rst b/docs/releases/v2018.1.rst
+index 1c4a97f..18613f4 100644
+--- a/docs/releases/v2018.1.rst
++++ b/docs/releases/v2018.1.rst
+@@ -207,6 +207,7 @@ site.mk
+ * We recommend to use *GLUON_FEATURES* for all Gluon packages, and rely on
+   *GLUON_SITE_PACKAGES* for non-Gluon (OpenWrt) packages only, as explained
+   in :ref:`user-site-feature-flags`.
++* The `GLUON_ATH10K_MESH` variable was renamed to `GLUON_WLAN_MESH`.
+ 
+ site.conf
+ =========
+-- 
+2.5.0
+

@@ -1,0 +1,47 @@
+From 20adee3227e5fc41624927f17593e6b32542fdd5 Mon Sep 17 00:00:00 2001
+From: rubo77 <github@r.z11.de>
+Date: Thu, 15 Nov 2018 00:13:07 +0100
+Subject: [PATCH] docs: multidomain: fix indentation
+
+---
+ docs/features/multidomain.rst | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
+
+diff --git a/docs/features/multidomain.rst b/docs/features/multidomain.rst
+index 6f70032..107c83d 100644
+--- a/docs/features/multidomain.rst
++++ b/docs/features/multidomain.rst
+@@ -214,20 +214,21 @@ domain.conf only variables
+ 
+    -  wifi*.ap.ssid
+ 
+-- Some values should be only set in legacy domains and not in new domains.
++-  Some values should be only set in legacy domains and not in new domains.
++
+    -  mesh.vxlan
+ 
+-       -  By default, this value is `true`. It should be only set to `false`
+-          for one legacy domain, since vxlan prevents accidental wired
+-          merges of domains. For old domains this value is still available
+-          to keep compatibility between all nodes in one domain.
++      -  By default, this value is `true`. It should be only set to `false`
++         for one legacy domain, since vxlan prevents accidental wired
++         merges of domains. For old domains this value is still available
++         to keep compatibility between all nodes in one domain.
+ 
+    -  next_node.mac
+ 
+-       -  For new domains, the default value should be used, since there is
+-          no need for a special mac (or domain specific mac). For old domains
+-          this value is still available to keep compatibility between all
+-          nodes in one domain.
++      -  For new domains, the default value should be used, since there is
++         no need for a special mac (or domain specific mac). For old domains
++         this value is still available to keep compatibility between all
++         nodes in one domain.
+ 
+ Example config
+ --------------
+-- 
+2.5.0
+

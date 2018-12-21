@@ -1,0 +1,28 @@
+From 42c895944f0479aa2ed61879e61743e00f5dbe75 Mon Sep 17 00:00:00 2001
+From: Ruben Barkow <rubo77@users.noreply.github.com>
+Date: Tue, 13 Nov 2018 12:52:44 +0100
+Subject: [PATCH] docs: multidomain: fix site.conf path to basic and supported
+ rates
+
+---
+ docs/features/multidomain.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/docs/features/multidomain.rst b/docs/features/multidomain.rst
+index 7fa55a3..6f70032 100644
+--- a/docs/features/multidomain.rst
++++ b/docs/features/multidomain.rst
+@@ -160,8 +160,8 @@ site.conf only variables
+    in a domain specific way:
+ 
+    -  mesh_vpn.fastd.syslog_level
+-   -  wifi*.ibss.supported_basic_rates
+-   -  wifi*.mesh.supported_basic_rates
++   -  wifi*.supported_rates
++   -  wifi*.basic_rates
+    -  timezone
+    -  regdom
+ 
+-- 
+2.5.0
+

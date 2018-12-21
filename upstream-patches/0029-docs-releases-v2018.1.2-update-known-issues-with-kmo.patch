@@ -1,0 +1,26 @@
+From 1617442981109b4c657e1b3832d84d60349a1805 Mon Sep 17 00:00:00 2001
+From: Martin Weinelt <martin@darmstadt.freifunk.net>
+Date: Sun, 25 Nov 2018 02:50:19 +0100
+Subject: [PATCH] docs: releases/v2018.1.2: update known issues with kmod
+ dependencies regression
+
+---
+ docs/releases/v2018.1.2.rst | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/docs/releases/v2018.1.2.rst b/docs/releases/v2018.1.2.rst
+index 7658b61..10be4a7 100644
+--- a/docs/releases/v2018.1.2.rst
++++ b/docs/releases/v2018.1.2.rst
+@@ -38,6 +38,8 @@ Other changes
+ Known issues
+ ~~~~~~~~~~~~
+ 
++* Missing kernel module dependencies prevent batman-adv from being loaded on devices without WiFi drivers  (`#1578 <https://github.com/freifunk-gluon/gluon/issues/1578`_)
++
+ * Default TX power on many Ubiquiti devices is too high, correct offsets are unknown (`#94 <https://github.com/freifunk-gluon/gluon/issues/94>`_)
+ 
+   Reducing the TX power in the Advanced Settings is recommended.
+-- 
+2.5.0
+

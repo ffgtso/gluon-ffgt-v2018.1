@@ -1,0 +1,40 @@
+From e1074159492df4f5ad9c1c3b1735643d0bb8cd45 Mon Sep 17 00:00:00 2001
+From: Martin Weinelt <mweinelt@users.noreply.github.com>
+Date: Fri, 12 Oct 2018 11:20:46 +0200
+Subject: [PATCH] modules: update routing packages (#1554)
+
+8b76007 nodogsplash: fix download hash
+ebc5874 Merge pull request #417 from bluewavenet/openwrt-18.06
+f68a998 nodogsplash: Backport v3.2.1 to OpenWrt 18.06
+2e21588 Merge pull request #414 from ecsv/batadv-18.06
+3785b55 Merge pull request #411 from bluewavenet/openwrt-18.06
+ddef390 batman-adv: Merge bugfixes from 2018.3
+ed5d97c nodogsplash: add missing config options
+b0e37f2 Merge pull request #409 from wfleurant/backport-fix-luci-cjdns
+85775e9 luci-app-cjdns: luci admin support for cjdns-v20.2 (#394)
+59e8158 Merge pull request #407 from bluewavenet/openwrt-18.06
+883dec4 nodogsplash: Backport v3.2.0
+021153d nodogsplash: Remove nodogsplash and nodogsplash2 in preparation for backport of v3.2.0
+9d9c0d0 Merge pull request #403 from dangowrt/bmx7-for-openwrt-18.06
+ab3529a bmx7: Avoid namespace collision with libubox.
+f0b852b bmx7: add config trigger
+---
+ modules | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/modules b/modules
+index 6adccea..b0169da 100644
+--- a/modules
++++ b/modules
+@@ -13,7 +13,7 @@ PACKAGES_GLUON_COMMIT=be2c35785994e443d895225c7240474a46f64f5e
+ 
+ PACKAGES_ROUTING_REPO=https://github.com/openwrt-routing/packages.git
+ PACKAGES_ROUTING_BRANCH=openwrt-18.06
+-PACKAGES_ROUTING_COMMIT=1b9d1c419f0ecefda51922a7845ab2183d6acd76
++PACKAGES_ROUTING_COMMIT=8b760071d17ca1245726903aae0d05d5ea6fe6e6
+ 
+ PACKAGES_LUCI_REPO=https://github.com/openwrt/luci.git
+ PACKAGES_LUCI_BRANCH=lede-17.01
+-- 
+2.5.0
+

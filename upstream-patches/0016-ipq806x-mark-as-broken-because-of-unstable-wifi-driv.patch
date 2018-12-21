@@ -1,0 +1,31 @@
+From dddd2cd01144407b04cb0a6d471c1381e7295545 Mon Sep 17 00:00:00 2001
+From: Martin Weinelt <martin@darmstadt.freifunk.net>
+Date: Mon, 3 Sep 2018 23:35:50 +0200
+Subject: [PATCH] ipq806x: mark as broken because of unstable wifi drivers
+
+---
+ targets/targets.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/targets/targets.mk b/targets/targets.mk
+index c02af67..f962e5c 100644
+--- a/targets/targets.mk
++++ b/targets/targets.mk
+@@ -13,7 +13,6 @@ $(eval $(call GluonTarget,x86,geode))
+ $(eval $(call GluonTarget,x86,64))
+ 
+ ifneq ($(GLUON_WLAN_MESH_11s)$(BROKEN),)
+-$(eval $(call GluonTarget,ipq806x))
+ $(eval $(call GluonTarget,ramips,mt7620))
+ $(eval $(call GluonTarget,ramips,mt7628))
+ $(eval $(call GluonTarget,ramips,rt305x))
+@@ -22,5 +21,6 @@ endif
+ ifneq ($(BROKEN),)
+ $(eval $(call GluonTarget,ar71xx,mikrotik)) # BROKEN: no sysupgrade support
+ $(eval $(call GluonTarget,brcm2708,bcm2710)) # BROKEN: Untested
++$(eval $(call GluonTarget,ipq806x)) # BROKEN: unstable wifi drivers
+ $(eval $(call GluonTarget,mvebu)) # BROKEN: No AP+IBSS or 11s support
+ endif
+-- 
+2.5.0
+

@@ -1,0 +1,42 @@
+From c18eb388ef0b22ee7ad9ff5cc1b8fac79589d202 Mon Sep 17 00:00:00 2001
+From: rubo77 <github@r.z11.de>
+Date: Tue, 20 Nov 2018 21:45:48 +0100
+Subject: [PATCH] docs: add routing_algo example
+
+---
+ docs/user/site.rst | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/docs/user/site.rst b/docs/user/site.rst
+index 80e5221..310bad7 100644
+--- a/docs/user/site.rst
++++ b/docs/user/site.rst
+@@ -219,8 +219,11 @@ mesh
+     in the *batman_adv* section:
+ 
+     The optional value *gw_sel_class* sets the gateway selection class. The
+-    default is class 20, which is based on the link quality (TQ) only; class 1
++    default is class ``20``, which is based on the link quality (TQ) only; class ``1``
+     is calculated from both the TQ and the announced bandwidth.
++
++    The optional value *routing_algo* allows to set up ``BATMAN_V`` based meshes.
++    If unset, the routing algorithm will default to ``BATMAN_IV``.
+     ::
+ 
+       mesh = {
+@@ -228,6 +231,7 @@ mesh
+         filter_membership_reports = false,
+         batman_adv = {
+           gw_sel_class = 1,
++          routing_algo = 'BATMAN_IV',
+         },
+       }
+ 
+@@ -676,4 +680,3 @@ site-repos in the wild
+ 
+ A non-exhaustive list of site-repos from various communities can be found on the
+ wiki: https://github.com/freifunk-gluon/gluon/wiki/Site-Configurations
+-
+-- 
+2.5.0
+
