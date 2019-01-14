@@ -91,6 +91,24 @@ function exec(command)
 	return data
 end
 
+local function readall(f)
+	if not f then
+		return nil
+	end
+
+	local data = f:read('*a')
+	f:close()
+	return data
+end
+
+function readfile(file)
+	return readall(io.open(file))
+end
+
+function old_readfile(file)
+	return fs.readfile(file)
+end
+
 function node_id()
 	return string.gsub(sysconfig.primary_mac, ':', '')
 end
